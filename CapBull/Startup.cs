@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Microsoft.AspNetCore.Mvc.Formatters;
+using LandonApi.Infrastructure;
 
 namespace CapBull
 {
@@ -30,6 +32,12 @@ namespace CapBull
             // Add framework services.
             services.AddMvc();
             services.AddRouting(opt => opt.LowercaseUrls = true);
+            services.AddMvc(opt =>
+            {
+                var jsonFormatter = opt.OutputFormatters.OfType<JsonOutputFormatter>().Single();
+                opt.OutputFormatters.Remove(jsonFormatter);
+                opt.OutputFormatters.Add(new IonOutputFormatter(jsonFormatter));
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
