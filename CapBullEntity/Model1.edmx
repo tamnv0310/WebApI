@@ -1,0 +1,940 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="CapBullModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="BANKS">
+          <Key>
+            <PropertyRef Name="BankID" />
+          </Key>
+          <Property Name="BankID" Type="int" Nullable="false" />
+          <Property Name="BankCode" Type="varchar" MaxLength="3" Nullable="false" />
+          <Property Name="BankName" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="MonthlyPaymentDate" Type="tinyint" Nullable="false" />
+          <Property Name="GuaranteeLimit" Type="tinyint" Nullable="false" />
+          <Property Name="CreditLimit" Type="tinyint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="GUARANTEE">
+          <Key>
+            <PropertyRef Name="GuaranteeID" />
+          </Key>
+          <Property Name="GuaranteeID" Type="int" Nullable="false" />
+          <Property Name="BankID" Type="int" Nullable="false" />
+          <Property Name="GuaranteeTypeID" Type="int" Nullable="false" />
+          <Property Name="StartDate" Type="date" Nullable="false" />
+          <Property Name="DueDate" Type="date" Nullable="false" />
+          <Property Name="GuaranteeAmount" Type="tinyint" Nullable="false" />
+          <Property Name="GuaranteeFee" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="GuaranteeObject" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Status" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="GUARANTEE_CATEGORIES">
+          <Key>
+            <PropertyRef Name="GuaranteeTypeID" />
+          </Key>
+          <Property Name="GuaranteeTypeID" Type="int" Nullable="false" />
+          <Property Name="GuaranteeTypeName" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="HOLIDAYS">
+          <Key>
+            <PropertyRef Name="HolidayID" />
+          </Key>
+          <Property Name="HolidayID" Type="int" Nullable="false" />
+          <Property Name="HolidayName" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="INTEREST_RATES">
+          <Key>
+            <PropertyRef Name="RateID" />
+          </Key>
+          <Property Name="RateID" Type="int" Nullable="false" />
+          <Property Name="LoanID" Type="int" Nullable="false" />
+          <Property Name="Value" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="StartDate" Type="date" Nullable="false" />
+          <Property Name="EndDate" Type="date" Nullable="false" />
+        </EntityType>
+        <EntityType Name="LOAN_CATEGORIES">
+          <Key>
+            <PropertyRef Name="LoanTypeID" />
+          </Key>
+          <Property Name="LoanTypeID" Type="int" Nullable="false" />
+          <Property Name="LoanTypeName" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="LOANS">
+          <Key>
+            <PropertyRef Name="LoanID" />
+          </Key>
+          <Property Name="LoanID" Type="int" Nullable="false" />
+          <Property Name="BankID" Type="int" Nullable="false" />
+          <Property Name="PaymentID" Type="int" Nullable="false" />
+          <Property Name="LoanTypeID" Type="int" Nullable="false" />
+          <Property Name="LoanAmount" Type="int" Nullable="false" />
+          <Property Name="StartDate" Type="date" Nullable="false" />
+          <Property Name="DueDate" Type="date" Nullable="false" />
+          <Property Name="LoanTerms" Type="tinyint" Nullable="false" />
+          <Property Name="GracePeriod" Type="tinyint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PAY_PRINCIPLE">
+          <Key>
+            <PropertyRef Name="PayID" />
+          </Key>
+          <Property Name="PayID" Type="int" Nullable="false" />
+          <Property Name="LoanID" Type="int" Nullable="false" />
+          <Property Name="DatePaid" Type="date" Nullable="false" />
+          <Property Name="Amount" Type="tinyint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PAYMENTS">
+          <Key>
+            <PropertyRef Name="PaymentID" />
+          </Key>
+          <Property Name="PaymentID" Type="int" Nullable="false" />
+          <Property Name="DatePaid" Type="date" Nullable="false" />
+          <Property Name="PayPrinciple" Type="tinyint" Nullable="false" />
+          <Property Name="PayInterest" Type="tinyint" Nullable="false" />
+          <Property Name="Status" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PERMISSIONS">
+          <Key>
+            <PropertyRef Name="PermissionID" />
+          </Key>
+          <Property Name="PermissionID" Type="int" Nullable="false" />
+          <Property Name="PermissionName" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ROLE_PERMISSION">
+          <Key>
+            <PropertyRef Name="PermissionID" />
+          </Key>
+          <Property Name="PermissionID" Type="int" Nullable="false" />
+          <Property Name="RoleID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ROLES">
+          <Key>
+            <PropertyRef Name="RoleID" />
+          </Key>
+          <Property Name="RoleID" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="TENANTS">
+          <Key>
+            <PropertyRef Name="TenantID" />
+          </Key>
+          <Property Name="TenantID" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="USERS">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="int" Nullable="false" />
+          <Property Name="TenantID" Type="int" Nullable="false" />
+          <Property Name="FullName" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Email" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="PhoneNum" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Password" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Status" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="USERS_ROLES">
+          <Key>
+            <PropertyRef Name="RoleID" />
+          </Key>
+          <Property Name="RoleID" Type="int" Nullable="false" />
+          <Property Name="UserID" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_GUARANTEE_BANKS">
+          <End Role="BANKS" Type="Self.BANKS" Multiplicity="1" />
+          <End Role="GUARANTEE" Type="Self.GUARANTEE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BANKS">
+              <PropertyRef Name="BankID" />
+            </Principal>
+            <Dependent Role="GUARANTEE">
+              <PropertyRef Name="BankID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GUARANTEE_GUARANTEE_CATEGORIES">
+          <End Role="GUARANTEE_CATEGORIES" Type="Self.GUARANTEE_CATEGORIES" Multiplicity="1" />
+          <End Role="GUARANTEE" Type="Self.GUARANTEE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GUARANTEE_CATEGORIES">
+              <PropertyRef Name="GuaranteeTypeID" />
+            </Principal>
+            <Dependent Role="GUARANTEE">
+              <PropertyRef Name="GuaranteeTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_INTEREST_RATES_LOANS">
+          <End Role="LOANS" Type="Self.LOANS" Multiplicity="1" />
+          <End Role="INTEREST_RATES" Type="Self.INTEREST_RATES" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LOANS">
+              <PropertyRef Name="LoanID" />
+            </Principal>
+            <Dependent Role="INTEREST_RATES">
+              <PropertyRef Name="LoanID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LOANS_BANKS">
+          <End Role="BANKS" Type="Self.BANKS" Multiplicity="1" />
+          <End Role="LOANS" Type="Self.LOANS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BANKS">
+              <PropertyRef Name="BankID" />
+            </Principal>
+            <Dependent Role="LOANS">
+              <PropertyRef Name="BankID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LOANS_LOAN_CATEGORIES">
+          <End Role="LOAN_CATEGORIES" Type="Self.LOAN_CATEGORIES" Multiplicity="1" />
+          <End Role="LOANS" Type="Self.LOANS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LOAN_CATEGORIES">
+              <PropertyRef Name="LoanTypeID" />
+            </Principal>
+            <Dependent Role="LOANS">
+              <PropertyRef Name="LoanTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LOANS_PAYMENTS">
+          <End Role="PAYMENTS" Type="Self.PAYMENTS" Multiplicity="1" />
+          <End Role="LOANS" Type="Self.LOANS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PAYMENTS">
+              <PropertyRef Name="PaymentID" />
+            </Principal>
+            <Dependent Role="LOANS">
+              <PropertyRef Name="PaymentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PAY_PRINCIPLE_LOANS">
+          <End Role="LOANS" Type="Self.LOANS" Multiplicity="1" />
+          <End Role="PAY_PRINCIPLE" Type="Self.PAY_PRINCIPLE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LOANS">
+              <PropertyRef Name="LoanID" />
+            </Principal>
+            <Dependent Role="PAY_PRINCIPLE">
+              <PropertyRef Name="LoanID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PERMISSIONS_ROLE_PERMISSION">
+          <End Role="ROLE_PERMISSION" Type="Self.ROLE_PERMISSION" Multiplicity="1" />
+          <End Role="PERMISSIONS" Type="Self.PERMISSIONS" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="ROLE_PERMISSION">
+              <PropertyRef Name="PermissionID" />
+            </Principal>
+            <Dependent Role="PERMISSIONS">
+              <PropertyRef Name="PermissionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ROLE_PERMISSION_ROLES">
+          <End Role="ROLES" Type="Self.ROLES" Multiplicity="1" />
+          <End Role="ROLE_PERMISSION" Type="Self.ROLE_PERMISSION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ROLES">
+              <PropertyRef Name="RoleID" />
+            </Principal>
+            <Dependent Role="ROLE_PERMISSION">
+              <PropertyRef Name="RoleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_USERS_ROLES_ROLES">
+          <End Role="ROLES" Type="Self.ROLES" Multiplicity="1" />
+          <End Role="USERS_ROLES" Type="Self.USERS_ROLES" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ROLES">
+              <PropertyRef Name="RoleID" />
+            </Principal>
+            <Dependent Role="USERS_ROLES">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_USERS_ROLES_USERS">
+          <End Role="USERS" Type="Self.USERS" Multiplicity="1" />
+          <End Role="USERS_ROLES" Type="Self.USERS_ROLES" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USERS">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="USERS_ROLES">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_USERS_TENANTS">
+          <End Role="TENANTS" Type="Self.TENANTS" Multiplicity="1" />
+          <End Role="USERS" Type="Self.USERS" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TENANTS">
+              <PropertyRef Name="TenantID" />
+            </Principal>
+            <Dependent Role="USERS">
+              <PropertyRef Name="TenantID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="CapBullModelStoreContainer">
+          <EntitySet Name="BANKS" EntityType="Self.BANKS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="GUARANTEE" EntityType="Self.GUARANTEE" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="GUARANTEE_CATEGORIES" EntityType="Self.GUARANTEE_CATEGORIES" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="HOLIDAYS" EntityType="Self.HOLIDAYS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="INTEREST_RATES" EntityType="Self.INTEREST_RATES" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LOAN_CATEGORIES" EntityType="Self.LOAN_CATEGORIES" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LOANS" EntityType="Self.LOANS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PAY_PRINCIPLE" EntityType="Self.PAY_PRINCIPLE" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PAYMENTS" EntityType="Self.PAYMENTS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PERMISSIONS" EntityType="Self.PERMISSIONS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ROLE_PERMISSION" EntityType="Self.ROLE_PERMISSION" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ROLES" EntityType="Self.ROLES" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TENANTS" EntityType="Self.TENANTS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="USERS" EntityType="Self.USERS" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="USERS_ROLES" EntityType="Self.USERS_ROLES" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_GUARANTEE_BANKS" Association="Self.FK_GUARANTEE_BANKS">
+            <End Role="BANKS" EntitySet="BANKS" />
+            <End Role="GUARANTEE" EntitySet="GUARANTEE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GUARANTEE_GUARANTEE_CATEGORIES" Association="Self.FK_GUARANTEE_GUARANTEE_CATEGORIES">
+            <End Role="GUARANTEE_CATEGORIES" EntitySet="GUARANTEE_CATEGORIES" />
+            <End Role="GUARANTEE" EntitySet="GUARANTEE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_INTEREST_RATES_LOANS" Association="Self.FK_INTEREST_RATES_LOANS">
+            <End Role="LOANS" EntitySet="LOANS" />
+            <End Role="INTEREST_RATES" EntitySet="INTEREST_RATES" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LOANS_BANKS" Association="Self.FK_LOANS_BANKS">
+            <End Role="BANKS" EntitySet="BANKS" />
+            <End Role="LOANS" EntitySet="LOANS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LOANS_LOAN_CATEGORIES" Association="Self.FK_LOANS_LOAN_CATEGORIES">
+            <End Role="LOAN_CATEGORIES" EntitySet="LOAN_CATEGORIES" />
+            <End Role="LOANS" EntitySet="LOANS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LOANS_PAYMENTS" Association="Self.FK_LOANS_PAYMENTS">
+            <End Role="PAYMENTS" EntitySet="PAYMENTS" />
+            <End Role="LOANS" EntitySet="LOANS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PAY_PRINCIPLE_LOANS" Association="Self.FK_PAY_PRINCIPLE_LOANS">
+            <End Role="LOANS" EntitySet="LOANS" />
+            <End Role="PAY_PRINCIPLE" EntitySet="PAY_PRINCIPLE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PERMISSIONS_ROLE_PERMISSION" Association="Self.FK_PERMISSIONS_ROLE_PERMISSION">
+            <End Role="ROLE_PERMISSION" EntitySet="ROLE_PERMISSION" />
+            <End Role="PERMISSIONS" EntitySet="PERMISSIONS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ROLE_PERMISSION_ROLES" Association="Self.FK_ROLE_PERMISSION_ROLES">
+            <End Role="ROLES" EntitySet="ROLES" />
+            <End Role="ROLE_PERMISSION" EntitySet="ROLE_PERMISSION" />
+          </AssociationSet>
+          <AssociationSet Name="FK_USERS_ROLES_ROLES" Association="Self.FK_USERS_ROLES_ROLES">
+            <End Role="ROLES" EntitySet="ROLES" />
+            <End Role="USERS_ROLES" EntitySet="USERS_ROLES" />
+          </AssociationSet>
+          <AssociationSet Name="FK_USERS_ROLES_USERS" Association="Self.FK_USERS_ROLES_USERS">
+            <End Role="USERS" EntitySet="USERS" />
+            <End Role="USERS_ROLES" EntitySet="USERS_ROLES" />
+          </AssociationSet>
+          <AssociationSet Name="FK_USERS_TENANTS" Association="Self.FK_USERS_TENANTS">
+            <End Role="TENANTS" EntitySet="TENANTS" />
+            <End Role="USERS" EntitySet="USERS" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="CapBullModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="BANK">
+          <Key>
+            <PropertyRef Name="BankID" />
+          </Key>
+          <Property Name="BankID" Type="Int32" Nullable="false" />
+          <Property Name="BankCode" Type="String" MaxLength="3" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="BankName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="MonthlyPaymentDate" Type="Byte" Nullable="false" />
+          <Property Name="GuaranteeLimit" Type="Byte" Nullable="false" />
+          <Property Name="CreditLimit" Type="Byte" Nullable="false" />
+          <NavigationProperty Name="GUARANTEEs" Relationship="Self.FK_GUARANTEE_BANKS" FromRole="BANKS" ToRole="GUARANTEE" />
+          <NavigationProperty Name="LOANS" Relationship="Self.FK_LOANS_BANKS" FromRole="BANKS" ToRole="LOANS" />
+        </EntityType>
+        <EntityType Name="GUARANTEE">
+          <Key>
+            <PropertyRef Name="GuaranteeID" />
+          </Key>
+          <Property Name="GuaranteeID" Type="Int32" Nullable="false" />
+          <Property Name="BankID" Type="Int32" Nullable="false" />
+          <Property Name="GuaranteeTypeID" Type="Int32" Nullable="false" />
+          <Property Name="StartDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="DueDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="GuaranteeAmount" Type="Byte" Nullable="false" />
+          <Property Name="GuaranteeFee" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="GuaranteeObject" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Status" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="BANK" Relationship="Self.FK_GUARANTEE_BANKS" FromRole="GUARANTEE" ToRole="BANKS" />
+          <NavigationProperty Name="GUARANTEE_CATEGORIES" Relationship="Self.FK_GUARANTEE_GUARANTEE_CATEGORIES" FromRole="GUARANTEE" ToRole="GUARANTEE_CATEGORIES" />
+        </EntityType>
+        <EntityType Name="GUARANTEE_CATEGORIES">
+          <Key>
+            <PropertyRef Name="GuaranteeTypeID" />
+          </Key>
+          <Property Name="GuaranteeTypeID" Type="Int32" Nullable="false" />
+          <Property Name="GuaranteeTypeName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="GUARANTEEs" Relationship="Self.FK_GUARANTEE_GUARANTEE_CATEGORIES" FromRole="GUARANTEE_CATEGORIES" ToRole="GUARANTEE" />
+        </EntityType>
+        <EntityType Name="HOLIDAY">
+          <Key>
+            <PropertyRef Name="HolidayID" />
+          </Key>
+          <Property Name="HolidayID" Type="Int32" Nullable="false" />
+          <Property Name="HolidayName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+        </EntityType>
+        <EntityType Name="INTEREST_RATES">
+          <Key>
+            <PropertyRef Name="RateID" />
+          </Key>
+          <Property Name="RateID" Type="Int32" Nullable="false" />
+          <Property Name="LoanID" Type="Int32" Nullable="false" />
+          <Property Name="Value" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="StartDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="EndDate" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="LOAN" Relationship="Self.FK_INTEREST_RATES_LOANS" FromRole="INTEREST_RATES" ToRole="LOANS" />
+        </EntityType>
+        <EntityType Name="LOAN_CATEGORIES">
+          <Key>
+            <PropertyRef Name="LoanTypeID" />
+          </Key>
+          <Property Name="LoanTypeID" Type="Int32" Nullable="false" />
+          <Property Name="LoanTypeName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="LOANS" Relationship="Self.FK_LOANS_LOAN_CATEGORIES" FromRole="LOAN_CATEGORIES" ToRole="LOANS" />
+        </EntityType>
+        <EntityType Name="LOAN">
+          <Key>
+            <PropertyRef Name="LoanID" />
+          </Key>
+          <Property Name="LoanID" Type="Int32" Nullable="false" />
+          <Property Name="BankID" Type="Int32" Nullable="false" />
+          <Property Name="PaymentID" Type="Int32" Nullable="false" />
+          <Property Name="LoanTypeID" Type="Int32" Nullable="false" />
+          <Property Name="LoanAmount" Type="Int32" Nullable="false" />
+          <Property Name="StartDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="DueDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="LoanTerms" Type="Byte" Nullable="false" />
+          <Property Name="GracePeriod" Type="Byte" Nullable="false" />
+          <NavigationProperty Name="BANK" Relationship="Self.FK_LOANS_BANKS" FromRole="LOANS" ToRole="BANKS" />
+          <NavigationProperty Name="INTEREST_RATES" Relationship="Self.FK_INTEREST_RATES_LOANS" FromRole="LOANS" ToRole="INTEREST_RATES" />
+          <NavigationProperty Name="LOAN_CATEGORIES" Relationship="Self.FK_LOANS_LOAN_CATEGORIES" FromRole="LOANS" ToRole="LOAN_CATEGORIES" />
+          <NavigationProperty Name="PAYMENT" Relationship="Self.FK_LOANS_PAYMENTS" FromRole="LOANS" ToRole="PAYMENTS" />
+          <NavigationProperty Name="PAY_PRINCIPLE" Relationship="Self.FK_PAY_PRINCIPLE_LOANS" FromRole="LOANS" ToRole="PAY_PRINCIPLE" />
+        </EntityType>
+        <EntityType Name="PAY_PRINCIPLE">
+          <Key>
+            <PropertyRef Name="PayID" />
+          </Key>
+          <Property Name="PayID" Type="Int32" Nullable="false" />
+          <Property Name="LoanID" Type="Int32" Nullable="false" />
+          <Property Name="DatePaid" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Amount" Type="Byte" Nullable="false" />
+          <NavigationProperty Name="LOAN" Relationship="Self.FK_PAY_PRINCIPLE_LOANS" FromRole="PAY_PRINCIPLE" ToRole="LOANS" />
+        </EntityType>
+        <EntityType Name="PAYMENT">
+          <Key>
+            <PropertyRef Name="PaymentID" />
+          </Key>
+          <Property Name="PaymentID" Type="Int32" Nullable="false" />
+          <Property Name="DatePaid" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="PayPrinciple" Type="Byte" Nullable="false" />
+          <Property Name="PayInterest" Type="Byte" Nullable="false" />
+          <Property Name="Status" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="LOANS" Relationship="Self.FK_LOANS_PAYMENTS" FromRole="PAYMENTS" ToRole="LOANS" />
+        </EntityType>
+        <EntityType Name="PERMISSION">
+          <Key>
+            <PropertyRef Name="PermissionID" />
+          </Key>
+          <Property Name="PermissionID" Type="Int32" Nullable="false" />
+          <Property Name="PermissionName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="ROLE_PERMISSION" Relationship="Self.FK_PERMISSIONS_ROLE_PERMISSION" FromRole="PERMISSIONS" ToRole="ROLE_PERMISSION" />
+        </EntityType>
+        <EntityType Name="ROLE_PERMISSION">
+          <Key>
+            <PropertyRef Name="PermissionID" />
+          </Key>
+          <Property Name="PermissionID" Type="Int32" Nullable="false" />
+          <Property Name="RoleID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="PERMISSION" Relationship="Self.FK_PERMISSIONS_ROLE_PERMISSION" FromRole="ROLE_PERMISSION" ToRole="PERMISSIONS" />
+          <NavigationProperty Name="ROLE" Relationship="Self.FK_ROLE_PERMISSION_ROLES" FromRole="ROLE_PERMISSION" ToRole="ROLES" />
+        </EntityType>
+        <EntityType Name="ROLE">
+          <Key>
+            <PropertyRef Name="RoleID" />
+          </Key>
+          <Property Name="RoleID" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="ROLE_PERMISSION" Relationship="Self.FK_ROLE_PERMISSION_ROLES" FromRole="ROLES" ToRole="ROLE_PERMISSION" />
+          <NavigationProperty Name="USERS_ROLES" Relationship="Self.FK_USERS_ROLES_ROLES" FromRole="ROLES" ToRole="USERS_ROLES" />
+        </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="TENANT">
+          <Key>
+            <PropertyRef Name="TenantID" />
+          </Key>
+          <Property Name="TenantID" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="USERS" Relationship="Self.FK_USERS_TENANTS" FromRole="TENANTS" ToRole="USERS" />
+        </EntityType>
+        <EntityType Name="USER">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="Int32" Nullable="false" />
+          <Property Name="TenantID" Type="Int32" Nullable="false" />
+          <Property Name="FullName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="PhoneNum" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Status" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="TENANT" Relationship="Self.FK_USERS_TENANTS" FromRole="USERS" ToRole="TENANTS" />
+          <NavigationProperty Name="USERS_ROLES" Relationship="Self.FK_USERS_ROLES_USERS" FromRole="USERS" ToRole="USERS_ROLES" />
+        </EntityType>
+        <EntityType Name="USERS_ROLES">
+          <Key>
+            <PropertyRef Name="RoleID" />
+          </Key>
+          <Property Name="RoleID" Type="Int32" Nullable="false" />
+          <Property Name="UserID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="ROLE" Relationship="Self.FK_USERS_ROLES_ROLES" FromRole="USERS_ROLES" ToRole="ROLES" />
+          <NavigationProperty Name="USER" Relationship="Self.FK_USERS_ROLES_USERS" FromRole="USERS_ROLES" ToRole="USERS" />
+        </EntityType>
+        <Association Name="FK_GUARANTEE_BANKS">
+          <End Role="BANKS" Type="Self.BANK" Multiplicity="1" />
+          <End Role="GUARANTEE" Type="Self.GUARANTEE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BANKS">
+              <PropertyRef Name="BankID" />
+            </Principal>
+            <Dependent Role="GUARANTEE">
+              <PropertyRef Name="BankID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LOANS_BANKS">
+          <End Role="BANKS" Type="Self.BANK" Multiplicity="1" />
+          <End Role="LOANS" Type="Self.LOAN" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BANKS">
+              <PropertyRef Name="BankID" />
+            </Principal>
+            <Dependent Role="LOANS">
+              <PropertyRef Name="BankID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_GUARANTEE_GUARANTEE_CATEGORIES">
+          <End Role="GUARANTEE_CATEGORIES" Type="Self.GUARANTEE_CATEGORIES" Multiplicity="1" />
+          <End Role="GUARANTEE" Type="Self.GUARANTEE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="GUARANTEE_CATEGORIES">
+              <PropertyRef Name="GuaranteeTypeID" />
+            </Principal>
+            <Dependent Role="GUARANTEE">
+              <PropertyRef Name="GuaranteeTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_INTEREST_RATES_LOANS">
+          <End Role="LOANS" Type="Self.LOAN" Multiplicity="1" />
+          <End Role="INTEREST_RATES" Type="Self.INTEREST_RATES" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LOANS">
+              <PropertyRef Name="LoanID" />
+            </Principal>
+            <Dependent Role="INTEREST_RATES">
+              <PropertyRef Name="LoanID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LOANS_LOAN_CATEGORIES">
+          <End Role="LOAN_CATEGORIES" Type="Self.LOAN_CATEGORIES" Multiplicity="1" />
+          <End Role="LOANS" Type="Self.LOAN" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LOAN_CATEGORIES">
+              <PropertyRef Name="LoanTypeID" />
+            </Principal>
+            <Dependent Role="LOANS">
+              <PropertyRef Name="LoanTypeID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LOANS_PAYMENTS">
+          <End Role="PAYMENTS" Type="Self.PAYMENT" Multiplicity="1" />
+          <End Role="LOANS" Type="Self.LOAN" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PAYMENTS">
+              <PropertyRef Name="PaymentID" />
+            </Principal>
+            <Dependent Role="LOANS">
+              <PropertyRef Name="PaymentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PAY_PRINCIPLE_LOANS">
+          <End Role="LOANS" Type="Self.LOAN" Multiplicity="1" />
+          <End Role="PAY_PRINCIPLE" Type="Self.PAY_PRINCIPLE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LOANS">
+              <PropertyRef Name="LoanID" />
+            </Principal>
+            <Dependent Role="PAY_PRINCIPLE">
+              <PropertyRef Name="LoanID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_PERMISSIONS_ROLE_PERMISSION">
+          <End Role="ROLE_PERMISSION" Type="Self.ROLE_PERMISSION" Multiplicity="1" />
+          <End Role="PERMISSIONS" Type="Self.PERMISSION" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="ROLE_PERMISSION">
+              <PropertyRef Name="PermissionID" />
+            </Principal>
+            <Dependent Role="PERMISSIONS">
+              <PropertyRef Name="PermissionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ROLE_PERMISSION_ROLES">
+          <End Role="ROLES" Type="Self.ROLE" Multiplicity="1" />
+          <End Role="ROLE_PERMISSION" Type="Self.ROLE_PERMISSION" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ROLES">
+              <PropertyRef Name="RoleID" />
+            </Principal>
+            <Dependent Role="ROLE_PERMISSION">
+              <PropertyRef Name="RoleID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_USERS_ROLES_ROLES">
+          <End Role="ROLES" Type="Self.ROLE" Multiplicity="1" />
+          <End Role="USERS_ROLES" Type="Self.USERS_ROLES" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ROLES">
+              <PropertyRef Name="RoleID" />
+            </Principal>
+            <Dependent Role="USERS_ROLES">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_USERS_TENANTS">
+          <End Role="TENANTS" Type="Self.TENANT" Multiplicity="1" />
+          <End Role="USERS" Type="Self.USER" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TENANTS">
+              <PropertyRef Name="TenantID" />
+            </Principal>
+            <Dependent Role="USERS">
+              <PropertyRef Name="TenantID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_USERS_ROLES_USERS">
+          <End Role="USERS" Type="Self.USER" Multiplicity="1" />
+          <End Role="USERS_ROLES" Type="Self.USERS_ROLES" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="USERS">
+              <PropertyRef Name="UserID" />
+            </Principal>
+            <Dependent Role="USERS_ROLES">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="CapBullEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="BANKS" EntityType="Self.BANK" />
+          <EntitySet Name="GUARANTEEs" EntityType="Self.GUARANTEE" />
+          <EntitySet Name="GUARANTEE_CATEGORIES" EntityType="Self.GUARANTEE_CATEGORIES" />
+          <EntitySet Name="HOLIDAYS" EntityType="Self.HOLIDAY" />
+          <EntitySet Name="INTEREST_RATES" EntityType="Self.INTEREST_RATES" />
+          <EntitySet Name="LOAN_CATEGORIES" EntityType="Self.LOAN_CATEGORIES" />
+          <EntitySet Name="LOANS" EntityType="Self.LOAN" />
+          <EntitySet Name="PAY_PRINCIPLE" EntityType="Self.PAY_PRINCIPLE" />
+          <EntitySet Name="PAYMENTS" EntityType="Self.PAYMENT" />
+          <EntitySet Name="PERMISSIONS" EntityType="Self.PERMISSION" />
+          <EntitySet Name="ROLE_PERMISSION" EntityType="Self.ROLE_PERMISSION" />
+          <EntitySet Name="ROLES" EntityType="Self.ROLE" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+          <EntitySet Name="TENANTS" EntityType="Self.TENANT" />
+          <EntitySet Name="USERS" EntityType="Self.USER" />
+          <EntitySet Name="USERS_ROLES" EntityType="Self.USERS_ROLES" />
+          <AssociationSet Name="FK_GUARANTEE_BANKS" Association="Self.FK_GUARANTEE_BANKS">
+            <End Role="BANKS" EntitySet="BANKS" />
+            <End Role="GUARANTEE" EntitySet="GUARANTEEs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LOANS_BANKS" Association="Self.FK_LOANS_BANKS">
+            <End Role="BANKS" EntitySet="BANKS" />
+            <End Role="LOANS" EntitySet="LOANS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_GUARANTEE_GUARANTEE_CATEGORIES" Association="Self.FK_GUARANTEE_GUARANTEE_CATEGORIES">
+            <End Role="GUARANTEE_CATEGORIES" EntitySet="GUARANTEE_CATEGORIES" />
+            <End Role="GUARANTEE" EntitySet="GUARANTEEs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_INTEREST_RATES_LOANS" Association="Self.FK_INTEREST_RATES_LOANS">
+            <End Role="LOANS" EntitySet="LOANS" />
+            <End Role="INTEREST_RATES" EntitySet="INTEREST_RATES" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LOANS_LOAN_CATEGORIES" Association="Self.FK_LOANS_LOAN_CATEGORIES">
+            <End Role="LOAN_CATEGORIES" EntitySet="LOAN_CATEGORIES" />
+            <End Role="LOANS" EntitySet="LOANS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LOANS_PAYMENTS" Association="Self.FK_LOANS_PAYMENTS">
+            <End Role="PAYMENTS" EntitySet="PAYMENTS" />
+            <End Role="LOANS" EntitySet="LOANS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PAY_PRINCIPLE_LOANS" Association="Self.FK_PAY_PRINCIPLE_LOANS">
+            <End Role="LOANS" EntitySet="LOANS" />
+            <End Role="PAY_PRINCIPLE" EntitySet="PAY_PRINCIPLE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_PERMISSIONS_ROLE_PERMISSION" Association="Self.FK_PERMISSIONS_ROLE_PERMISSION">
+            <End Role="ROLE_PERMISSION" EntitySet="ROLE_PERMISSION" />
+            <End Role="PERMISSIONS" EntitySet="PERMISSIONS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ROLE_PERMISSION_ROLES" Association="Self.FK_ROLE_PERMISSION_ROLES">
+            <End Role="ROLES" EntitySet="ROLES" />
+            <End Role="ROLE_PERMISSION" EntitySet="ROLE_PERMISSION" />
+          </AssociationSet>
+          <AssociationSet Name="FK_USERS_ROLES_ROLES" Association="Self.FK_USERS_ROLES_ROLES">
+            <End Role="ROLES" EntitySet="ROLES" />
+            <End Role="USERS_ROLES" EntitySet="USERS_ROLES" />
+          </AssociationSet>
+          <AssociationSet Name="FK_USERS_TENANTS" Association="Self.FK_USERS_TENANTS">
+            <End Role="TENANTS" EntitySet="TENANTS" />
+            <End Role="USERS" EntitySet="USERS" />
+          </AssociationSet>
+          <AssociationSet Name="FK_USERS_ROLES_USERS" Association="Self.FK_USERS_ROLES_USERS">
+            <End Role="USERS" EntitySet="USERS" />
+            <End Role="USERS_ROLES" EntitySet="USERS_ROLES" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="CapBullModelStoreContainer" CdmEntityContainer="CapBullEntities">
+          <EntitySetMapping Name="BANKS">
+            <EntityTypeMapping TypeName="CapBullModel.BANK">
+              <MappingFragment StoreEntitySet="BANKS">
+                <ScalarProperty Name="BankID" ColumnName="BankID" />
+                <ScalarProperty Name="BankCode" ColumnName="BankCode" />
+                <ScalarProperty Name="BankName" ColumnName="BankName" />
+                <ScalarProperty Name="MonthlyPaymentDate" ColumnName="MonthlyPaymentDate" />
+                <ScalarProperty Name="GuaranteeLimit" ColumnName="GuaranteeLimit" />
+                <ScalarProperty Name="CreditLimit" ColumnName="CreditLimit" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GUARANTEEs">
+            <EntityTypeMapping TypeName="CapBullModel.GUARANTEE">
+              <MappingFragment StoreEntitySet="GUARANTEE">
+                <ScalarProperty Name="GuaranteeID" ColumnName="GuaranteeID" />
+                <ScalarProperty Name="BankID" ColumnName="BankID" />
+                <ScalarProperty Name="GuaranteeTypeID" ColumnName="GuaranteeTypeID" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="DueDate" ColumnName="DueDate" />
+                <ScalarProperty Name="GuaranteeAmount" ColumnName="GuaranteeAmount" />
+                <ScalarProperty Name="GuaranteeFee" ColumnName="GuaranteeFee" />
+                <ScalarProperty Name="GuaranteeObject" ColumnName="GuaranteeObject" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="GUARANTEE_CATEGORIES">
+            <EntityTypeMapping TypeName="CapBullModel.GUARANTEE_CATEGORIES">
+              <MappingFragment StoreEntitySet="GUARANTEE_CATEGORIES">
+                <ScalarProperty Name="GuaranteeTypeID" ColumnName="GuaranteeTypeID" />
+                <ScalarProperty Name="GuaranteeTypeName" ColumnName="GuaranteeTypeName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HOLIDAYS">
+            <EntityTypeMapping TypeName="CapBullModel.HOLIDAY">
+              <MappingFragment StoreEntitySet="HOLIDAYS">
+                <ScalarProperty Name="HolidayID" ColumnName="HolidayID" />
+                <ScalarProperty Name="HolidayName" ColumnName="HolidayName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="INTEREST_RATES">
+            <EntityTypeMapping TypeName="CapBullModel.INTEREST_RATES">
+              <MappingFragment StoreEntitySet="INTEREST_RATES">
+                <ScalarProperty Name="RateID" ColumnName="RateID" />
+                <ScalarProperty Name="LoanID" ColumnName="LoanID" />
+                <ScalarProperty Name="Value" ColumnName="Value" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LOAN_CATEGORIES">
+            <EntityTypeMapping TypeName="CapBullModel.LOAN_CATEGORIES">
+              <MappingFragment StoreEntitySet="LOAN_CATEGORIES">
+                <ScalarProperty Name="LoanTypeID" ColumnName="LoanTypeID" />
+                <ScalarProperty Name="LoanTypeName" ColumnName="LoanTypeName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LOANS">
+            <EntityTypeMapping TypeName="CapBullModel.LOAN">
+              <MappingFragment StoreEntitySet="LOANS">
+                <ScalarProperty Name="LoanID" ColumnName="LoanID" />
+                <ScalarProperty Name="BankID" ColumnName="BankID" />
+                <ScalarProperty Name="PaymentID" ColumnName="PaymentID" />
+                <ScalarProperty Name="LoanTypeID" ColumnName="LoanTypeID" />
+                <ScalarProperty Name="LoanAmount" ColumnName="LoanAmount" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="DueDate" ColumnName="DueDate" />
+                <ScalarProperty Name="LoanTerms" ColumnName="LoanTerms" />
+                <ScalarProperty Name="GracePeriod" ColumnName="GracePeriod" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PAY_PRINCIPLE">
+            <EntityTypeMapping TypeName="CapBullModel.PAY_PRINCIPLE">
+              <MappingFragment StoreEntitySet="PAY_PRINCIPLE">
+                <ScalarProperty Name="PayID" ColumnName="PayID" />
+                <ScalarProperty Name="LoanID" ColumnName="LoanID" />
+                <ScalarProperty Name="DatePaid" ColumnName="DatePaid" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PAYMENTS">
+            <EntityTypeMapping TypeName="CapBullModel.PAYMENT">
+              <MappingFragment StoreEntitySet="PAYMENTS">
+                <ScalarProperty Name="PaymentID" ColumnName="PaymentID" />
+                <ScalarProperty Name="DatePaid" ColumnName="DatePaid" />
+                <ScalarProperty Name="PayPrinciple" ColumnName="PayPrinciple" />
+                <ScalarProperty Name="PayInterest" ColumnName="PayInterest" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PERMISSIONS">
+            <EntityTypeMapping TypeName="CapBullModel.PERMISSION">
+              <MappingFragment StoreEntitySet="PERMISSIONS">
+                <ScalarProperty Name="PermissionID" ColumnName="PermissionID" />
+                <ScalarProperty Name="PermissionName" ColumnName="PermissionName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ROLE_PERMISSION">
+            <EntityTypeMapping TypeName="CapBullModel.ROLE_PERMISSION">
+              <MappingFragment StoreEntitySet="ROLE_PERMISSION">
+                <ScalarProperty Name="PermissionID" ColumnName="PermissionID" />
+                <ScalarProperty Name="RoleID" ColumnName="RoleID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ROLES">
+            <EntityTypeMapping TypeName="CapBullModel.ROLE">
+              <MappingFragment StoreEntitySet="ROLES">
+                <ScalarProperty Name="RoleID" ColumnName="RoleID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="CapBullModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TENANTS">
+            <EntityTypeMapping TypeName="CapBullModel.TENANT">
+              <MappingFragment StoreEntitySet="TENANTS">
+                <ScalarProperty Name="TenantID" ColumnName="TenantID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="USERS">
+            <EntityTypeMapping TypeName="CapBullModel.USER">
+              <MappingFragment StoreEntitySet="USERS">
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="TenantID" ColumnName="TenantID" />
+                <ScalarProperty Name="FullName" ColumnName="FullName" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="PhoneNum" ColumnName="PhoneNum" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="USERS_ROLES">
+            <EntityTypeMapping TypeName="CapBullModel.USERS_ROLES">
+              <MappingFragment StoreEntitySet="USERS_ROLES">
+                <ScalarProperty Name="RoleID" ColumnName="RoleID" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

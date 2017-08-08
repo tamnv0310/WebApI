@@ -4,7 +4,7 @@ using System;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LandonApi.Infrastructure
+namespace CapBull.Infrastructure
 {
     public class IonOutputFormatter : TextOutputFormatter
     {

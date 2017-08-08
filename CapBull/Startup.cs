@@ -8,7 +8,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.Mvc.Formatters;
-using LandonApi.Infrastructure;
+using CapBull.Infrastructure;
 
 namespace CapBull
 {
