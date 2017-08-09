@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System;
 
-namespace LandonApi.Controllers
+namespace CapBull.Controllers
 {
     [Route("/[controller]")]
     public class UsersController : Controller

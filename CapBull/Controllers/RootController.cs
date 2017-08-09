@@ -4,9 +4,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace LandonApi.Controllers
+namespace CapBull.Controllers
 {
     [Route("/")]
+    [ApiVersion("1.0")]
     public class RootController : Controller
     {
         [HttpGet(Name = nameof(GetRoot))]

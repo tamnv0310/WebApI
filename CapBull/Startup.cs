@@ -12,6 +12,9 @@ using CapBull.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using CapBull.Models;
 using CapBull.Filters;
+using Microsoft.AspNetCore.Mvc.Versioning;
+using Microsoft.AspNetCore.Mvc;
+
 namespace CapBull
 {
     public class Startup
@@ -44,6 +47,15 @@ namespace CapBull
 
             services.AddDbContext<CapBullContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("CapBullContext")));
+
+            services.AddApiVersioning(opt =>
+            {
+                opt.ApiVersionReader = new MediaTypeApiVersionReader();
+                opt.AssumeDefaultVersionWhenUnspecified = true;
+                opt.ReportApiVersions = true;
+                opt.DefaultApiVersion = new ApiVersion(1, 0);
+                opt.ApiVersionSelector = new CurrentImplementationApiVersionSelector(opt);
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
