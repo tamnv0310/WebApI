@@ -11,7 +11,7 @@ using Microsoft.AspNetCore.Mvc.Formatters;
 using CapBull.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using CapBull.Models;
-
+using CapBull.Filters;
 namespace CapBull
 {
     public class Startup
@@ -36,6 +36,7 @@ namespace CapBull
             services.AddRouting(opt => opt.LowercaseUrls = true);
             services.AddMvc(opt =>
             {
+                opt.Filters.Add(typeof(JsonExceptionFilter));
                 var jsonFormatter = opt.OutputFormatters.OfType<JsonOutputFormatter>().Single();
                 opt.OutputFormatters.Remove(jsonFormatter);
                 opt.OutputFormatters.Add(new IonOutputFormatter(jsonFormatter));

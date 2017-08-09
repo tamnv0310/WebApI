@@ -13,7 +13,8 @@ namespace CapBull.Models
             : base(options)
         {
         }
-
+        public DbSet<TENANT> TENANT { get; set; }
+        
        
     }
 }
