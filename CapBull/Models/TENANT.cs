@@ -11,5 +11,6 @@ namespace CapBull.Models
         [Key]
         public int TenantID { get; set; }
         public string Name { get; set; }
+        public string Subdomain { get; set; }
     }
 }
