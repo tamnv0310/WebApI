@@ -7,23 +7,26 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace CapBullEntity
+namespace ClassLibrary1
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class LOAN_CATEGORIES
+    public partial class ROLE
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public LOAN_CATEGORIES()
+        public ROLE()
         {
-            this.LOANS = new HashSet<LOAN>();
+            this.ROLE_PERMISSION = new HashSet<ROLE_PERMISSION>();
+            this.USERS_ROLES = new HashSet<USERS_ROLES>();
         }
     
-        public int LoanTypeID { get; set; }
-        public string LoanTypeName { get; set; }
+        public int RoleID { get; set; }
+        public string Name { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<LOAN> LOANS { get; set; }
+        public virtual ICollection<ROLE_PERMISSION> ROLE_PERMISSION { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<USERS_ROLES> USERS_ROLES { get; set; }
     }
 }

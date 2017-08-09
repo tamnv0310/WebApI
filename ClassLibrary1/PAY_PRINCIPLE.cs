@@ -7,17 +7,18 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace CapBullEntity
+namespace ClassLibrary1
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class ROLE_PERMISSION
+    public partial class PAY_PRINCIPLE
     {
-        public int PermissionID { get; set; }
-        public int RoleID { get; set; }
+        public int PayID { get; set; }
+        public int LoanID { get; set; }
+        public System.DateTime DatePaid { get; set; }
+        public byte Amount { get; set; }
     
-        public virtual PERMISSION PERMISSION { get; set; }
-        public virtual ROLE ROLE { get; set; }
+        public virtual LOAN LOAN { get; set; }
     }
 }

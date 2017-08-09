@@ -7,26 +7,26 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace CapBullEntity
+namespace ClassLibrary1
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class ROLE
+    public partial class PAYMENT
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public ROLE()
+        public PAYMENT()
         {
-            this.ROLE_PERMISSION = new HashSet<ROLE_PERMISSION>();
-            this.USERS_ROLES = new HashSet<USERS_ROLES>();
+            this.LOANS = new HashSet<LOAN>();
         }
     
-        public int RoleID { get; set; }
-        public string Name { get; set; }
+        public int PaymentID { get; set; }
+        public System.DateTime DatePaid { get; set; }
+        public byte PayPrinciple { get; set; }
+        public byte PayInterest { get; set; }
+        public string Status { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ROLE_PERMISSION> ROLE_PERMISSION { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<USERS_ROLES> USERS_ROLES { get; set; }
+        public virtual ICollection<LOAN> LOANS { get; set; }
     }
 }

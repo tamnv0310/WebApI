@@ -1,0 +1,1 @@
+﻿insert into TENANTS values ('2','Tam1')

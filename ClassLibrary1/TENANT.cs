@@ -7,23 +7,23 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace CapBullEntity
+namespace ClassLibrary1
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class GUARANTEE_CATEGORIES
+    public partial class TENANT
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public GUARANTEE_CATEGORIES()
+        public TENANT()
         {
-            this.GUARANTEEs = new HashSet<GUARANTEE>();
+            this.USERS = new HashSet<USER>();
         }
     
-        public int GuaranteeTypeID { get; set; }
-        public string GuaranteeTypeName { get; set; }
+        public int TenantID { get; set; }
+        public string Name { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<GUARANTEE> GUARANTEEs { get; set; }
+        public virtual ICollection<USER> USERS { get; set; }
     }
 }

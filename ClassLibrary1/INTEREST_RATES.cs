@@ -7,17 +7,19 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace CapBullEntity
+namespace ClassLibrary1
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class sysdiagram
+    public partial class INTEREST_RATES
     {
-        public string name { get; set; }
-        public int principal_id { get; set; }
-        public int diagram_id { get; set; }
-        public Nullable<int> version { get; set; }
-        public byte[] definition { get; set; }
+        public int RateID { get; set; }
+        public int LoanID { get; set; }
+        public decimal Value { get; set; }
+        public System.DateTime StartDate { get; set; }
+        public System.DateTime EndDate { get; set; }
+    
+        public virtual LOAN LOAN { get; set; }
     }
 }

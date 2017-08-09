@@ -1,0 +1,1 @@
+﻿insert into USERS values ('1','2','b','c','Tam','tamnv0310@gmail.com','0964350625')

@@ -7,19 +7,16 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace CapBullEntity
+namespace ClassLibrary1
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class INTEREST_RATES
+    public partial class PERMISSION
     {
-        public int RateID { get; set; }
-        public int LoanID { get; set; }
-        public decimal Value { get; set; }
-        public System.DateTime StartDate { get; set; }
-        public System.DateTime EndDate { get; set; }
+        public int PermissionID { get; set; }
+        public string PermissionName { get; set; }
     
-        public virtual LOAN LOAN { get; set; }
+        public virtual ROLE_PERMISSION ROLE_PERMISSION { get; set; }
     }
 }

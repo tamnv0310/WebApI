@@ -9,6 +9,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.Mvc.Formatters;
 using CapBull.Infrastructure;
+using Microsoft.EntityFrameworkCore;
+using CapBull.Models;
 
 namespace CapBull
 {
@@ -38,6 +40,9 @@ namespace CapBull
                 opt.OutputFormatters.Remove(jsonFormatter);
                 opt.OutputFormatters.Add(new IonOutputFormatter(jsonFormatter));
             });
+
+            services.AddDbContext<CapBullContext>(options =>
+                    options.UseSqlServer(Configuration.GetConnectionString("CapBullContext")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -7,17 +7,17 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace CapBullEntity
+namespace ClassLibrary1
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class USERS_ROLES
+    public partial class ROLE_PERMISSION
     {
+        public int PermissionID { get; set; }
         public int RoleID { get; set; }
-        public int UserID { get; set; }
     
+        public virtual PERMISSION PERMISSION { get; set; }
         public virtual ROLE ROLE { get; set; }
-        public virtual USER USER { get; set; }
     }
 }

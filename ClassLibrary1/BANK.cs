@@ -7,23 +7,30 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace CapBullEntity
+namespace ClassLibrary1
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class TENANT
+    public partial class BANK
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public TENANT()
+        public BANK()
         {
-            this.USERS = new HashSet<USER>();
+            this.GUARANTEEs = new HashSet<GUARANTEE>();
+            this.LOANS = new HashSet<LOAN>();
         }
     
-        public int TenantID { get; set; }
-        public string Name { get; set; }
+        public int BankID { get; set; }
+        public string BankCode { get; set; }
+        public string BankName { get; set; }
+        public byte MonthlyPaymentDate { get; set; }
+        public byte GuaranteeLimit { get; set; }
+        public byte CreditLimit { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<USER> USERS { get; set; }
+        public virtual ICollection<GUARANTEE> GUARANTEEs { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<LOAN> LOANS { get; set; }
     }
 }

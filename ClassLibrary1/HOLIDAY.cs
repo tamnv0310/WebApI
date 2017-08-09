@@ -7,16 +7,14 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace CapBullEntity
+namespace ClassLibrary1
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class PERMISSION
+    public partial class HOLIDAY
     {
-        public int PermissionID { get; set; }
-        public string PermissionName { get; set; }
-    
-        public virtual ROLE_PERMISSION ROLE_PERMISSION { get; set; }
+        public int HolidayID { get; set; }
+        public string HolidayName { get; set; }
     }
 }

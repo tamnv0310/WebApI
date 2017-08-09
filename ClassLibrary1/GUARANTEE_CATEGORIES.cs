@@ -7,26 +7,23 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace CapBullEntity
+namespace ClassLibrary1
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class PAYMENT
+    public partial class GUARANTEE_CATEGORIES
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public PAYMENT()
+        public GUARANTEE_CATEGORIES()
         {
-            this.LOANS = new HashSet<LOAN>();
+            this.GUARANTEEs = new HashSet<GUARANTEE>();
         }
     
-        public int PaymentID { get; set; }
-        public System.DateTime DatePaid { get; set; }
-        public byte PayPrinciple { get; set; }
-        public byte PayInterest { get; set; }
-        public string Status { get; set; }
+        public int GuaranteeTypeID { get; set; }
+        public string GuaranteeTypeName { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<LOAN> LOANS { get; set; }
+        public virtual ICollection<GUARANTEE> GUARANTEEs { get; set; }
     }
 }
