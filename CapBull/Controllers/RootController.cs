@@ -17,7 +17,7 @@ namespace CapBull.Controllers
             var response = new
             {
                 href = Url.Link(nameof(GetRoot), null),
-                users = new { href = Url.Link(nameof(UsersController.GetUsers), null) }
+                users = new { href = Url.Link(nameof(UsersController.GetUsers), null) },
             };
 
             return Ok(response);

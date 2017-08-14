@@ -7,9 +7,18 @@
 
   <ItemGroup>
     <Compile Remove="Filters\**" />
+    <Compile Remove="Views\**" />
     <Content Remove="Filters\**" />
+    <Content Remove="Views\**" />
     <EmbeddedResource Remove="Filters\**" />
+    <EmbeddedResource Remove="Views\**" />
     <None Remove="Filters\**" />
+    <None Remove="Views\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="Controllers\BaseApiController.cs" />
+    <Compile Remove="Models\UserRole.cs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -17,6 +26,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Services\" />
     <Folder Include="wwwroot\" />
   </ItemGroup>
   <ItemGroup>

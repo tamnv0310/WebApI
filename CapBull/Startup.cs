@@ -60,7 +60,9 @@ namespace CapBull
 
             services.AddDbContext<CapBullContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("CapBullContext")));
-
+            //services.AddIdentity<Users, UserRole>()
+            //    .AddEntityFrameworkStores<CapBullContext, Guid>()
+            //    .AddDefaultTokenProviders();
             services.AddApiVersioning(opt =>
             {
                 opt.ApiVersionReader = new MediaTypeApiVersionReader();
@@ -69,6 +71,7 @@ namespace CapBull
                 opt.DefaultApiVersion = new ApiVersion(1, 0);
                 opt.ApiVersionSelector = new CurrentImplementationApiVersionSelector(opt);
             });
+            services.Configure<Tenants>(Configuration.GetSection("Tenants"));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -78,6 +81,24 @@ namespace CapBull
             loggerFactory.AddDebug();
 
             app.UseMvc();
+            //if(env.IsDevelopment())
+            //{
+            //    var context = app.ApplicationServices.GetRequiredService<CapBullContext>();
+            //    AddTestData(context);
+            //}
+            app.UseHsts(opt =>
+            {
+                opt.MaxAge(days: 180);
+                opt.IncludeSubdomains();
+                opt.Preload();
+            }
+
+            );
         }
+
+        //private static void AddTestData(CapBullContext context)
+        //{
+        //    context.Ten
+        //}
     }
 }
